@@ -10,3 +10,5 @@ create table user(
     primary key(user_id),
     unique key unique_username (username)
 );
+
+select * from user;

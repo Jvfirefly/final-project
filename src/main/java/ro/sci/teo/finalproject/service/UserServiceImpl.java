@@ -8,6 +8,9 @@ import ro.sci.teo.finalproject.model.UserRepository;
 
 import java.util.HashSet;
 
+/**
+ * @author Teo
+ */
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -25,6 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUserName(username);
+        return userRepository.findByUsername(username);
     }
 }
