@@ -24,7 +24,7 @@ public class User {
     @Size(min = 2, max = 30, message = "At least 2 characters!")
     private String username;
 
-    @Size(min = 10, max = 30, message = "At least 10 characters!")
+    //@Size(min = 10, max = 30, message = "At least 10 characters!")
     @NotEmpty(message = "*Please provide your password.")
     private String password;
 

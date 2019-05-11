@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Trip</title>
+    <style type="text/css">
+        .form-control {
+            min-height: 41px;
+            box-shadow: none;
+            border-color: #e1e4e5;
+        }
+        .form-control:focus {
+            border-color: #5fcaba;
+        }
+        .form-control, .btn {
+            border-radius: 3px;
+        }
+        .newTrip-form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        .newTrip-form form {
+            color: #9ba5a8;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            background: #fff;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        .newTrip-form h2 {
+            color: #333;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .newTrip-form .form-group {
+            margin-bottom: 20px;
+        }
+        .newTrip-form label {
+            font-weight: normal;
+            font-size: 13px;
+        }
+        .newTrip-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #5fcaba;
+            border: none;
+            min-width: 140px;
+        }
+        .newTrip-form .btn:hover, .newTrip-form .btn:focus {
+            background: #3fc0ad;
+            outline: none !important;
+        }
+        .newTrip-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .newTrip-form a:hover {
+            text-decoration: none;
+        }
+        .newTrip-form form a {
+            color: #5fcaba;
+            text-decoration: none;
+        }
+        .newTrip-form form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="continut">
+    <div class="newTrip-form">
+        <form th:action="@{/new-trip}" th:object="${trip}" method="POST">
+            <h2>New Trip Details</h2>
+            <div class="form-group">
+                <input class="form-control" placeholder="Trip Name" id="name" type="text" th:field="*{name}"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Date From" id="dateFrom" type="date" th:field="*{dateFrom}"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Date To" id="dateTo" type="date" th:field="*{dateTo}"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Impressions ..." id="impressions" type="text" rows="5"
+                       th:field="*{impressions}"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Photo 1" id="photo1" type="text" th:field="*{photo1}"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Photo 2" id="photo2" type="text" th:field="*{photo2}"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Location" id="location" type="text" th:field="*{location}"/>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-block btn-lg" type="submit">Add Trip</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

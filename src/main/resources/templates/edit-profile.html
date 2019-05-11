@@ -59,28 +59,14 @@
             background: #3fc0ad;
             outline: none !important;
         }
-        .signup-form a {
-            color: #fff;
-            text-decoration: underline;
-        }
-        .signup-form a:hover {
-            text-decoration: none;
-        }
-        .signup-form form a {
-            color: #5fcaba;
-            text-decoration: none;
-        }
-        .signup-form form a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
 <div layout:fragment="continut">
     <div class="signup-form">
-        <form th:action="@{/signup}" th:object="${user}" method="POST">
-            <h2>New Profile</h2>
+        <form th:action="@{/edit-profile}" th:object="${user}" method="POST">
+            <h2>[[*{name}]]'s Profile</h2>
             <div class="form-group">
                 <input class="form-control" placeholder="First Name" id="name" type="text" th:field="*{name}"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
@@ -94,12 +80,12 @@
                 <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Password" id="password" type="password"
+                <input class="form-control" placeholder="New Password" id="password" type="password"
                        th:field="*{password}" data-toggle="password"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Confirm Password" id="passwordConfirm" type="password"
+                <input class="form-control" placeholder="Confirm New Password" id="passwordConfirm" type="password"
                        th:field="*{passwordConfirm}" data-toggle="password"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}"
                        th:errors="*{passwordConfirm}"></small>
@@ -117,10 +103,9 @@
                 <small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
             </div>
             <div>
-                <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
+                <button class="btn btn-primary btn-block btn-lg" type="submit">Edit Profile</button>
             </div>
         </form>
-        <div class="text-center">Already have an account? <a href="/login">Login here</a></div>
     </div>
 </div>
 

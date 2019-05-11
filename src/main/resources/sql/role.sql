@@ -3,3 +3,5 @@ create table role(
     name varchar(30) default null,
     primary key (role_id)
 );
+
+select * from role;
