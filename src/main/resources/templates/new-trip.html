@@ -19,6 +19,9 @@
         .form-control, .btn {
             border-radius: 3px;
         }
+        textarea {
+            resize: vertical;
+        }
         .newTrip-form {
             width: 400px;
             margin: 0 auto;
@@ -55,27 +58,13 @@
             background: #3fc0ad;
             outline: none !important;
         }
-        .newTrip-form a {
-            color: #fff;
-            text-decoration: underline;
-        }
-        .newTrip-form a:hover {
-            text-decoration: none;
-        }
-        .newTrip-form form a {
-            color: #5fcaba;
-            text-decoration: none;
-        }
-        .newTrip-form form a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
 <div layout:fragment="continut">
     <div class="newTrip-form">
-        <form th:action="@{/new-trip}" th:object="${trip}" method="POST">
+        <form th:action="@{/new-trip}" th:object="${trip}" enctype="multipart/form-data" method="POST">
             <h2>New Trip Details</h2>
             <div class="form-group">
                 <input class="form-control" placeholder="Trip Name" id="name" type="text" th:field="*{name}"/>
@@ -88,14 +77,15 @@
                 <input class="form-control" placeholder="Date To" id="dateTo" type="date" th:field="*{dateTo}"/>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Impressions ..." id="impressions" type="text" rows="5"
-                       th:field="*{impressions}"/>
+                <textarea class="form-control" placeholder="Impressions ..." id="impressions" rows="3"
+                       th:field="*{impressions}">
+                </textarea>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Photo 1" id="photo1" type="text" th:field="*{photo1}"/>
+                <input class="form-control" placeholder="Photo 1" id="photo1" type="file" th:field="*{photo1}"/>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Photo 2" id="photo2" type="text" th:field="*{photo2}"/>
+                <input class="form-control" placeholder="Photo 2" id="photo2" type="file" th:field="*{photo2}"/>
             </div>
             <div class="form-group">
                 <input class="form-control" placeholder="Location" id="location" type="text" th:field="*{location}"/>

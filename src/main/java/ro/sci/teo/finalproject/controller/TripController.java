@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ro.sci.teo.finalproject.model.Trip;
 import ro.sci.teo.finalproject.service.SecurityService;
 import ro.sci.teo.finalproject.service.TripService;
@@ -30,11 +30,24 @@ public class TripController {
     }
 
     @PostMapping("/new-trip")
-    public String addTrip(@Valid Trip trip, BindingResult bindingResult) {
+    public String addTrip(@RequestParam("photo1") MultipartFile imageFile1,
+                          @RequestParam("photo2") MultipartFile imageFile2,
+                          @ModelAttribute("trip") @Valid Trip trip, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "new-trip";
         }
-        trip.setUserId(1);
+
+        try{
+            tripService.saveImg(imageFile1);
+            tripService.saveImg(imageFile2);
+        }catch(Exception e){
+            e.printStackTrace();
+            return "new-trip";
+        }
+
+        trip.setUserId(2);
+        trip.setPhoto1(imageFile1.getOriginalFilename());
+        trip.setPhoto2(imageFile2.getOriginalFilename());
         tripService.saveTrip(trip);
         return "redirect:/login";
     }
