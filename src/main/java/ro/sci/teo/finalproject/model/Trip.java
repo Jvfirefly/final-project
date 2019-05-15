@@ -15,7 +15,9 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tripId;
 
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name ="user_id", nullable = false)
+    private User user;
 
     private String name;
 
@@ -27,9 +29,13 @@ public class Trip {
 
     private String impressions;
 
-    private String photo1; //path of first picture
+    private String photo1; //name of first picture
+    private String title1; //title of first picture
+    private String description1; //description of first picture
 
-    private String photo2; //path of 2nd picture
+    private String photo2;
+    private String title2;
+    private String description2;
 
     private String location;
 
@@ -41,12 +47,12 @@ public class Trip {
         this.tripId = tripId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -89,12 +95,44 @@ public class Trip {
         this.photo1 = photo1;
     }
 
+    public String getTitle1() {
+        return title1;
+    }
+
+    public void setTitle1(String title1) {
+        this.title1 = title1;
+    }
+
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
+    }
+
     public String getPhoto2() {
         return photo2;
     }
 
     public void setPhoto2(String photo2) {
         this.photo2 = photo2;
+    }
+
+    public String getTitle2() {
+        return title2;
+    }
+
+    public void setTitle2(String title2) {
+        this.title2 = title2;
+    }
+
+    public String getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(String description2) {
+        this.description2 = description2;
     }
 
     public String getLocation() {

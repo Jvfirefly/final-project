@@ -3,9 +3,9 @@
       layout:decorate="~{layout/main}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Sign up</title>
     <script
             type="text/javascript"
@@ -67,6 +67,7 @@
     <div class="signup-form">
         <form th:action="@{/edit-profile}" th:object="${user}" method="POST">
             <h2>[[*{name}]]'s Profile</h2>
+            <input type="hidden" id="userId" th:field="*{userId}"/>
             <div class="form-group">
                 <input class="form-control" placeholder="First Name" id="name" type="text" th:field="*{name}"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>

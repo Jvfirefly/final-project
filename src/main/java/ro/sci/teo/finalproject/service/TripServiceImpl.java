@@ -30,9 +30,9 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public void saveImg(MultipartFile imageFile) throws Exception {
-        String directory = "/photos/";
+        String directory = System.getProperty("user.dir") + "/src/main/resources/static/photos/";
         byte[] bytes = imageFile.getBytes();
-        Path path = Paths.get(directory + imageFile.getOriginalFilename());
-        Files.write(path, bytes);
+        Path pathAndFileName = Paths.get(directory, imageFile.getOriginalFilename());
+        Files.write(pathAndFileName, bytes);
     }
 }

@@ -7,3 +7,5 @@ create table users_roles(
 );
 
 select * from users_roles;
+
+insert into users_roles values (4,1);

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout/main}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Log In</title>
     <script
             type="text/javascript"
@@ -77,18 +78,22 @@
 </head>
 
 <body>
-    <div layout:fragment="continut">
+<div layout:fragment="continut">
     <div class="signin-form">
-        <form th:action="@{/login}" th:object="${user}" method="POST">
+        <form th:action="@{/login}" method="POST">
             <h2>Log In</h2>
-            <div class="form-group">
-                <input class="form-control" placeholder="Username" id="username" type="text" th:field="*{username}"/>
-                <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+            <div class="form-group" th:if="${param.error}">
+                Invalid username and/or password.
+            </div>
+            <div class="form-group" th:if="${param.logout}">
+                You have been logged out successfully.
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Password" id="password" type="password" th:field="*{password}"
+                <input class="form-control" placeholder="Username" id="username" name="username" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Password" id="password" name="password" type="password"
                        data-toggle="password"/>
-                <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             </div>
             <div>
                 <button class="btn btn-primary btn-block btn-lg" type="submit">Log In</button>
@@ -96,11 +101,12 @@
         </form>
         <div class="text-center">Don't have an account? <a href="/signup">Register here</a></div>
     </div>
-    </div>
-</body>
+</div>
 
 <script type="text/javascript">
 	$("#password").password('toggle');
 </script>
+
+</body>
 
 </html>

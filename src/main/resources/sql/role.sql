@@ -5,3 +5,5 @@ create table role(
 );
 
 select * from role;
+
+insert into role values (1,'user');

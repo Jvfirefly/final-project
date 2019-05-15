@@ -1,10 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Trips</title>
+    <style type="text/css">
+        .form-control {
+            min-height: 41px;
+            box-shadow: none;
+            border-color: #e1e4e5;
+        }
+        .form-control:focus {
+            border-color: #5fcaba;
+        }
+        .form-control, .btn {
+            border-radius: 3px;
+        }
+         textarea {
+            resize: vertical;
+        }
+        .trips-form {
+            width: 1000px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        .trips-form form {
+            color: #9ba5a8;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            background: #fff;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            overflow: auto;
+        }
+        .trips-form h2 {
+            color: #333;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .trips-form .form-group {
+            margin-bottom: 20px;
+        }
+        .trips-form label {
+            font-weight: normal;
+            font-size: 13px;
+        }
+        .trips-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #5fcaba;
+            border: none;
+            min-width: 140px;
+        }
+        .trips-form .btn:hover, .trips-form .btn:focus {
+            background: #3fc0ad;
+            outline: none !important;
+        }
+        .thumbnail {
+            position: relative;
+            padding: 0px;
+            margin-bottom: 20px;
+        }
+        .thumbnail img {
+             width: 100%;
+        }
+
+    </style>
 </head>
+
 <body>
+<div layout:fragment="continut">
+    <div class="trips-form">
+        <form th:action="@{/trips}" method="POST">
+            <h2>My Trips</h2>
+            <div class="form-group">
+                <label for="selectTrip">Trip</label>
+                <select class="form-control" id="selectTrip">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div><!-- End row -->
+
+            <div class="form-group">
+                <label for="impressions">Impressions</label>
+                <textarea class="form-control" rows="3" id="impressions" readonly></textarea>
+            </div><!-- End row -->
+
+            <div class="form-group">
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/500x300" alt=""/>
+                        <div class="caption">
+                            <h4>Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi
+                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique
+                                suscipit</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/500x300" alt=""/>
+                        <div class="caption">
+                            <h4>Thumbnail label</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi
+                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique
+                                suscipit</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="form-group">
+                        <label for="dates">Dates</label>
+                        <input type="text" class="form-control" id="dates" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" readonly>
+                    </div>
+                    <div class="form-group">
+                        <a href="/edit-trip" class="btn btn-primary btn-block btn-lg" role="button">Edit</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>
+                    </div>
+                </div>
+            </div><!-- End row -->
+
+        </form>
+    </div><!-- End trips -->
+</div>
 
 </body>
 </html>
