@@ -9,6 +9,7 @@ import ro.sci.teo.finalproject.model.TripRepository;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * @author Teo
@@ -24,15 +25,15 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Trip findByName(String name) {
-        return tripRepository.findByName(name);
-    }
-
-    @Override
     public void saveImg(MultipartFile imageFile) throws Exception {
         String directory = System.getProperty("user.dir") + "/src/main/resources/static/photos/";
         byte[] bytes = imageFile.getBytes();
         Path pathAndFileName = Paths.get(directory, imageFile.getOriginalFilename());
         Files.write(pathAndFileName, bytes);
+    }
+
+    @Override
+    public List<Trip> findTripsByUserId(int userId) {
+        return tripRepository.findTripsByUserId(userId);
     }
 }

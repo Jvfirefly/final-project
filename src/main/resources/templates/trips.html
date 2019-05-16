@@ -72,66 +72,68 @@
 <body>
 <div layout:fragment="continut">
     <div class="trips-form">
-        <form th:action="@{/trips}" method="POST">
+        <form th:action="@{/trips}" th:object="${trip}" method="POST">
             <h2>My Trips</h2>
             <div class="form-group">
-                <label for="selectTrip">Trip</label>
-                <select class="form-control" id="selectTrip">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                <label for="choice">Trip</label>
+                <select class="form-control" id="choice" name="choice" onchange="this.form.submit()">
+                    <option
+                            th:each="choice: ${trips}"
+                            th:value="${choice}"
+                            th:text="${choice.name}">
+                    </option>
                 </select>
             </div><!-- End row -->
 
             <div class="form-group">
                 <label for="impressions">Impressions</label>
-                <textarea class="form-control" rows="3" id="impressions" readonly></textarea>
+                <textarea class="form-control" rows="3" id="impressions" th:text="*{impressions}" readonly>
+                </textarea>
             </div><!-- End row -->
 
-            <div class="form-group">
-                <div class="col-xs-24 col-sm-8 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/500x300" alt=""/>
-                        <div class="caption">
-                            <h4>Thumbnail label</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi
-                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique
-                                suscipit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-24 col-sm-8 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/500x300" alt=""/>
-                        <div class="caption">
-                            <h4>Thumbnail label</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi
-                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique
-                                suscipit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-24 col-sm-8 col-md-4">
-                    <div class="form-group">
-                        <label for="dates">Dates</label>
-                        <input type="text" class="form-control" id="dates" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" readonly>
-                    </div>
-                    <div class="form-group">
-                        <a href="/edit-trip" class="btn btn-primary btn-block btn-lg" role="button">Edit</a>
-                    </div>
-                    <div class="form-group">
-                        <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>
-                    </div>
-                </div>
-            </div><!-- End row -->
+<!--            <div class="form-group">-->
+<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
+<!--                    <div class="thumbnail">-->
+<!--                        <img src="http://placehold.it/500x300" alt=""/>-->
+<!--                        <div class="caption">-->
+<!--                            <h4>Thumbnail label</h4>-->
+<!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi-->
+<!--                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique-->
+<!--                                suscipit</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
+<!--                    <div class="thumbnail">-->
+<!--                        <img src="http://placehold.it/500x300" alt=""/>-->
+<!--                        <div class="caption">-->
+<!--                            <h4>Thumbnail label</h4>-->
+<!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi-->
+<!--                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique-->
+<!--                                suscipit</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="dates">Dates</label>-->
+<!--                        <input type="text" class="form-control" id="dates" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="location">Location</label>-->
+<!--                        <input type="text" class="form-control" id="location" th:field="*{location}" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <a href="/edit-trip" class="btn btn-primary btn-block btn-lg" role="button">Edit</a>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>&lt;!&ndash; End row &ndash;&gt;-->
 
         </form>
     </div><!-- End trips -->

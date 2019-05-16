@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ro.sci.teo.finalproject.model.User;
 import ro.sci.teo.finalproject.service.SecurityService;
@@ -52,12 +51,21 @@ public class UserController {
     }
 
     @GetMapping("/edit-profile")
-    //@ResponseBody
     public ModelAndView showUser() {
         ModelAndView mv = new ModelAndView("edit-profile");
-        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        String loggedInUsername = securityService.findLoggedInUsername();
+        User user = userService.findByUsername(loggedInUsername);
         mv.addObject("user", user);
         return mv;
+    }
+
+    @PostMapping("/edit-profile")
+    public String updateUser(@Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/edit-profile";
+        }
+        userService.saveUser(user);
+        return "edit-profile";
     }
 
     @GetMapping("/logout")

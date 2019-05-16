@@ -6,10 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import ro.sci.teo.finalproject.model.Trip;
+import ro.sci.teo.finalproject.model.User;
+import ro.sci.teo.finalproject.service.SecurityService;
 import ro.sci.teo.finalproject.service.TripService;
+import ro.sci.teo.finalproject.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Teo
@@ -17,7 +22,13 @@ import javax.validation.Valid;
 @Controller
 public class TripController {
     @Autowired
+    UserService userService;
+
+    @Autowired
     TripService tripService;
+
+    @Autowired
+    SecurityService securityService;
 
     @GetMapping("/new-trip")
     public String showNewTripForm(Model model) {
@@ -33,24 +44,42 @@ public class TripController {
             return "new-trip";
         }
 
-        try{
+        try {
             tripService.saveImg(photoFile1);
             tripService.saveImg(photoFile2);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "new-trip";
         }
 
-        //trip.setUserId(2);
+        trip.setUser(userService.findByUsername(securityService.findLoggedInUsername()));
         trip.setPhoto1(photoFile1.getOriginalFilename());
         trip.setPhoto2(photoFile2.getOriginalFilename());
         tripService.saveTrip(trip);
-        return "redirect:/login";
+        return "redirect:/trips";
     }
 
     @GetMapping("/trips")
-    public String showTrips() {
-        //model.addAttribute("trip", new Trip());
-        return "trips";
+    public ModelAndView showTrips(@ModelAttribute("choice") Trip trip) {
+        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        List<Trip> userTrips = tripService.findTripsByUserId(user.getUserId());
+
+        if (userTrips == null)
+            return new ModelAndView("redirect:/new-trip");
+
+        ModelAndView mv = new ModelAndView("trips");
+        mv.addObject("trips", userTrips);
+        System.out.println(trip+"greeeeeeeeeeeeeeeeeeeeeeeeeeeeat-NOT-NULL-ANYMORE");
+        mv.addObject("trip", trip);
+
+        return mv;
+    }
+
+    @PostMapping("/trips")
+    public ModelAndView showSelectedTrip(@RequestParam("choice") Trip trip){
+        ModelAndView mv = new ModelAndView("trips");
+//        System.out.println(trip+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        mv.addObject("trip", trip);
+        return mv;
     }
 }

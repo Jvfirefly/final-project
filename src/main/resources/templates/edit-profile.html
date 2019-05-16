@@ -81,12 +81,12 @@
                 <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="New Password" id="password" type="password"
+                <input class="form-control" placeholder="Password" id="password" type="password"
                        th:field="*{password}" data-toggle="password"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Confirm New Password" id="passwordConfirm" type="password"
+                <input class="form-control" placeholder="Confirm Password" id="passwordConfirm" type="password"
                        th:field="*{passwordConfirm}" data-toggle="password"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}"
                        th:errors="*{passwordConfirm}"></small>

@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @author Teo
@@ -141,5 +142,24 @@ public class Trip {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "tripId=" + tripId +
+                ", user=" + user +
+                ", name='" + name + '\'' +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                ", impressions='" + impressions + '\'' +
+                ", photo1='" + photo1 + '\'' +
+                ", title1='" + title1 + '\'' +
+                ", description1='" + description1 + '\'' +
+                ", photo2='" + photo2 + '\'' +
+                ", title2='" + title2 + '\'' +
+                ", description2='" + description2 + '\'' +
+                ", location='" + location + '\'' +
+                '}';
     }
 }
