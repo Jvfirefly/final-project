@@ -60,7 +60,7 @@ public class TripController {
     }
 
     @GetMapping("/trips")
-    public ModelAndView showTrips(@ModelAttribute("choice") Trip trip) {
+    public ModelAndView showTrips(@RequestParam("choice") int tripId) {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
         List<Trip> userTrips = tripService.findTripsByUserId(user.getUserId());
 
@@ -69,17 +69,18 @@ public class TripController {
 
         ModelAndView mv = new ModelAndView("trips");
         mv.addObject("trips", userTrips);
-        System.out.println(trip+"greeeeeeeeeeeeeeeeeeeeeeeeeeeeat-NOT-NULL-ANYMORE");
-        mv.addObject("trip", trip);
+        //System.out.println(tripId);
+        //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        //mv.addObject("trip", trip);
 
         return mv;
     }
 
-    @PostMapping("/trips")
-    public ModelAndView showSelectedTrip(@RequestParam("choice") Trip trip){
-        ModelAndView mv = new ModelAndView("trips");
+//    @PostMapping("/trips")
+//    public ModelAndView showSelectedTrip(@RequestParam("choice") Trip trip){
+//        ModelAndView mv = new ModelAndView("trips");
 //        System.out.println(trip+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        mv.addObject("trip", trip);
-        return mv;
-    }
+//        mv.addObject("trip", trip);
+//        return mv;
+//    }
 }

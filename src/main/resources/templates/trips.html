@@ -72,24 +72,24 @@
 <body>
 <div layout:fragment="continut">
     <div class="trips-form">
-        <form th:action="@{/trips}" th:object="${trip}" method="POST">
+        <form th:action="@{/trips}" th:object="${trip}" method="GET">
             <h2>My Trips</h2>
             <div class="form-group">
                 <label for="choice">Trip</label>
                 <select class="form-control" id="choice" name="choice" onchange="this.form.submit()">
                     <option
                             th:each="choice: ${trips}"
-                            th:value="${choice}"
+                            th:value="${choice.tripId}"
                             th:text="${choice.name}">
                     </option>
                 </select>
             </div><!-- End row -->
 
-            <div class="form-group">
-                <label for="impressions">Impressions</label>
-                <textarea class="form-control" rows="3" id="impressions" th:text="*{impressions}" readonly>
-                </textarea>
-            </div><!-- End row -->
+<!--            <div class="form-group">-->
+<!--                <label for="impressions">Impressions</label>-->
+<!--                <textarea class="form-control" rows="3" id="impressions" th:text="*{impressions}" readonly>-->
+<!--                </textarea>-->
+<!--            </div>&lt;!&ndash; End row &ndash;&gt;-->
 
 <!--            <div class="form-group">-->
 <!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
