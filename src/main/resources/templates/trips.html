@@ -85,55 +85,55 @@
                 </select>
             </div><!-- End row -->
 
-<!--            <div class="form-group">-->
-<!--                <label for="impressions">Impressions</label>-->
-<!--                <textarea class="form-control" rows="3" id="impressions" th:text="*{impressions}" readonly>-->
-<!--                </textarea>-->
-<!--            </div>&lt;!&ndash; End row &ndash;&gt;-->
+            <div class="form-group">
+                <label for="impressions">Impressions</label>
+                <textarea class="form-control" rows="3" id="impressions" th:text="${trip.impressions}" readonly>
+                </textarea>
+            </div><!-- End row -->
 
-<!--            <div class="form-group">-->
-<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
-<!--                    <div class="thumbnail">-->
-<!--                        <img src="http://placehold.it/500x300" alt=""/>-->
-<!--                        <div class="caption">-->
-<!--                            <h4>Thumbnail label</h4>-->
-<!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi-->
-<!--                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique-->
-<!--                                suscipit</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
-<!--                    <div class="thumbnail">-->
-<!--                        <img src="http://placehold.it/500x300" alt=""/>-->
-<!--                        <div class="caption">-->
-<!--                            <h4>Thumbnail label</h4>-->
-<!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi-->
-<!--                                doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique-->
-<!--                                suscipit</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-xs-24 col-sm-8 col-md-4">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="dates">Dates</label>-->
-<!--                        <input type="text" class="form-control" id="dates" readonly>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="location">Location</label>-->
-<!--                        <input type="text" class="form-control" id="location" th:field="*{location}" readonly>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <a href="/edit-trip" class="btn btn-primary btn-block btn-lg" role="button">Edit</a>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>&lt;!&ndash; End row &ndash;&gt;-->
+            <div class="form-group">
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="thumbnail">
+                        <img th:src="@{${'/photos/' + trip.photo1}}" alt="Photo1"/>
+                        <div class="caption">
+                            <h4 th:text="${trip.title1}"></h4>
+                            <p th:text="${trip.description1}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="thumbnail">
+                        <img th:src="@{${'/photos/' + trip.photo2}}" alt="Photo2"/>
+                        <div class="caption">
+                            <h4 th:text="${trip.title2}"></h4>
+                            <p th:text="${trip.description2}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-24 col-sm-8 col-md-4">
+                    <div class="form-group">
+                        <label for="dates">Dates</label>
+                        <textarea class="form-control" style="resize: none; text-align: center;" rows="1" id="dates"
+                                  th:text="${#temporals.format(trip.dateTo, 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(trip.dateFrom, 'dd/MM/yyyy')}" readonly>
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <textarea class="form-control" style="resize: none; text-align: center;" rows="1" id="location"
+                                  th:text="${trip.location}" readonly>
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <a href="/edit-trip" class="btn btn-primary btn-block btn-lg" role="button">Edit</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>
+                    </div>
+                </div>
+            </div><!-- End row -->
 
         </form>
     </div><!-- End trips -->

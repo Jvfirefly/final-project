@@ -60,18 +60,27 @@ public class TripController {
     }
 
     @GetMapping("/trips")
-    public ModelAndView showTrips(@RequestParam("choice") int tripId) {
+    public ModelAndView showTrips(@RequestParam(name = "choice", required = false) Integer tripId) {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
-        List<Trip> userTrips = tripService.findTripsByUserId(user.getUserId());
+        List<Trip> trips = tripService.findTripsByUserId(user.getUserId());
 
-        if (userTrips == null)
+        if (trips == null)
             return new ModelAndView("redirect:/new-trip");
 
         ModelAndView mv = new ModelAndView("trips");
-        mv.addObject("trips", userTrips);
-        //System.out.println(tripId);
-        //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        //mv.addObject("trip", trip);
+        mv.addObject("trips", trips);
+
+        System.out.println(tripId);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+//        Trip selectedTrip = new Trip();
+//        for(Trip trip: trips){
+//            if(trip.getTripId() == tripId) {
+//                selectedTrip = trip;
+//            }
+//        }
+//        mv.addObject("trip", selectedTrip);
+        mv.addObject("trip", trips.get(1));
 
         return mv;
     }
