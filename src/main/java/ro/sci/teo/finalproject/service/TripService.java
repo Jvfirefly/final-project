@@ -15,5 +15,5 @@ public interface TripService {
 
     List<Trip> findTripsByUserId(int userId);
 
-    void deleteTripById(Integer tripId);
+    Trip findTripById(int tripId);
 }

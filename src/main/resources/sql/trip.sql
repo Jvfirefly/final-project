@@ -18,3 +18,4 @@ create table trip(
 );
 
 select * from trip;
+alter table trip add deleted bool;

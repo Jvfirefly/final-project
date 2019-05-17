@@ -33,6 +33,7 @@ public class TripController {
     @GetMapping("/new-trip")
     public String showNewTripForm(Model model) {
         model.addAttribute("trip", new Trip());
+
         return "new-trip";
     }
 
@@ -56,6 +57,7 @@ public class TripController {
         trip.setPhoto1(photoFile1.getOriginalFilename());
         trip.setPhoto2(photoFile2.getOriginalFilename());
         tripService.saveTrip(trip);
+
         return "redirect:/trips";
     }
 
@@ -70,8 +72,6 @@ public class TripController {
         ModelAndView mv = new ModelAndView("trips");
         mv.addObject("trips", trips);
 
-        System.out.println(tripId);
-
         if (tripId == null) {
             mv.addObject("trip", trips.get(0)); //first trip to appear on the page after login
         } else {
@@ -85,12 +85,44 @@ public class TripController {
         return mv;
     }
 
+    @GetMapping("/edit-trip/{id}")
+    public ModelAndView showTrip(@PathVariable("id") int tripId) {
+        ModelAndView mv = new ModelAndView("edit-trip");
+        Trip tripToEdit = tripService.findTripById(tripId);
+        mv.addObject("trip", tripToEdit);
+
+        return mv;
+    }
+
+    @PostMapping("/edit-trip/{id}")
+    public String updateTrip(@RequestParam("photoFile1") MultipartFile photoFile1,
+                             @RequestParam("photoFile2") MultipartFile photoFile2,
+                             @ModelAttribute("trip") @Valid Trip trip, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/edit-trip/{id}";
+        }
+
+        try {
+            tripService.saveImg(photoFile1);
+            tripService.saveImg(photoFile2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/edit-trip/{id}";
+        }
+
+        trip.setUser(userService.findByUsername(securityService.findLoggedInUsername()));
+        trip.setPhoto1(photoFile1.getOriginalFilename());
+        trip.setPhoto2(photoFile2.getOriginalFilename());
+        tripService.saveTrip(trip);
+
+        return "/edit-trip/{id}";
+    }
+
     @PostMapping("/delete")
-    public String deleteTrip() {
-//        if (tripId == null){
-//            tripService.deleteTripById(); //first trip to appear on the page after login
-//        }
-        tripService.deleteTripById(10);
+    public String deleteTrip(@RequestParam(name = "id", required = false) int tripId) {
+        Trip tripToDelete = tripService.findTripById(tripId);
+        tripToDelete.setDeleted();
+        tripService.saveTrip(tripToDelete);
 
         return "redirect:/trips";
     }

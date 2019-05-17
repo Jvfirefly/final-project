@@ -65,7 +65,8 @@
 <div layout:fragment="continut">
     <div class="newTrip-form">
         <form th:action="@{/new-trip}" th:object="${trip}" enctype="multipart/form-data" method="POST">
-            <h2>New Trip Details</h2>
+            <h2>Edit Trip</h2>
+            <input type="hidden" id="tripId" th:field="*{tripId}"/>
             <div class="form-group">
                 <input class="form-control" placeholder="Trip Name" id="name" type="text" th:field="*{name}"/>
                 <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
