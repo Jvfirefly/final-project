@@ -12,8 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Integer> {
-    Trip findByName(String name);
-
     @Query(value="select * from trip where user_id=:value", nativeQuery = true)
     List<Trip> findTripsByUserId(@Param("value") int userId);
 }

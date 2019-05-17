@@ -71,25 +71,27 @@ public class TripController {
         mv.addObject("trips", trips);
 
         System.out.println(tripId);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-//        Trip selectedTrip = new Trip();
-//        for(Trip trip: trips){
-//            if(trip.getTripId() == tripId) {
-//                selectedTrip = trip;
-//            }
-//        }
-//        mv.addObject("trip", selectedTrip);
-        mv.addObject("trip", trips.get(1));
+        if (tripId == null) {
+            mv.addObject("trip", trips.get(0)); //first trip to appear on the page after login
+        } else {
+            Trip selectedTrip = new Trip();
+            for (Trip trip : trips)
+                if (trip.getTripId() == tripId)
+                    selectedTrip = trip;
+            mv.addObject("trip", selectedTrip);
+        }
 
         return mv;
     }
 
-//    @PostMapping("/trips")
-//    public ModelAndView showSelectedTrip(@RequestParam("choice") Trip trip){
-//        ModelAndView mv = new ModelAndView("trips");
-//        System.out.println(trip+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        mv.addObject("trip", trip);
-//        return mv;
-//    }
+    @PostMapping("/delete")
+    public String deleteTrip() {
+//        if (tripId == null){
+//            tripService.deleteTripById(); //first trip to appear on the page after login
+//        }
+        tripService.deleteTripById(10);
+
+        return "redirect:/trips";
+    }
 }

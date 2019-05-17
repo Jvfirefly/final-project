@@ -63,9 +63,8 @@
             margin-bottom: 20px;
         }
         .thumbnail img {
-             width: 100%;
+            width: 100%;
         }
-
     </style>
 </head>
 
@@ -77,6 +76,7 @@
             <div class="form-group">
                 <label for="choice">Trip</label>
                 <select class="form-control" id="choice" name="choice" onchange="this.form.submit()">
+                    <option th:value="${trip.tripId}" th:text="${trip.name}"></option>
                     <option
                             th:each="choice: ${trips}"
                             th:value="${choice.tripId}"
@@ -114,7 +114,8 @@
                     <div class="form-group">
                         <label for="dates">Dates</label>
                         <textarea class="form-control" style="resize: none; text-align: center;" rows="1" id="dates"
-                                  th:text="${#temporals.format(trip.dateTo, 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(trip.dateFrom, 'dd/MM/yyyy')}" readonly>
+                                  th:text="${#temporals.format(trip.dateTo, 'dd/MM/yyyy')} + ' - ' +
+                                           ${#temporals.format(trip.dateFrom, 'dd/MM/yyyy')}" readonly>
                         </textarea>
                     </div>
                     <div class="form-group">
@@ -130,7 +131,9 @@
                         <a href="/new-trip" class="btn btn-primary btn-block btn-lg" role="button">Add</a>
                     </div>
                     <div class="form-group">
-                        <a href="#" class="btn btn-primary btn-block btn-lg" role="button">Delete</a>
+                        <form th:action="@{/delete}" method="POST">
+                            <input type="submit" class="btn btn-primary btn-block btn-lg" value="Delete"/>
+                        </form>
                     </div>
                 </div>
             </div><!-- End row -->

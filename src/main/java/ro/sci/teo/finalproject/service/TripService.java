@@ -14,4 +14,6 @@ public interface TripService {
     void saveImg(MultipartFile imageFile) throws Exception;
 
     List<Trip> findTripsByUserId(int userId);
+
+    void deleteTripById(Integer tripId);
 }

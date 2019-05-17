@@ -36,4 +36,9 @@ public class TripServiceImpl implements TripService {
     public List<Trip> findTripsByUserId(int userId) {
         return tripRepository.findTripsByUserId(userId);
     }
+
+    @Override
+    public void deleteTripById(Integer tripId) {
+        tripRepository.deleteById(tripId);
+    }
 }
