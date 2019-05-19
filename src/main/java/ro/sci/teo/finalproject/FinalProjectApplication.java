@@ -2,7 +2,6 @@ package ro.sci.teo.finalproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /**
  * @author Teo
  */

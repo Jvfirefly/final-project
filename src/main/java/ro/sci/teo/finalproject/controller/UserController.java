@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ro.sci.teo.finalproject.model.User;
 import ro.sci.teo.finalproject.service.SecurityService;
 import ro.sci.teo.finalproject.service.UserService;
+import ro.sci.teo.finalproject.validator.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
+    private UserValidator userValidator;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -32,16 +36,20 @@ public class UserController {
     @GetMapping("/signup")
     public String showSignUp(Model model) {
         model.addAttribute("user", new User());
+
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String signUp(@Valid User user, BindingResult bindingResult) {
+    public String signUp(User user, BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "signup";
         }
         userService.saveUser(user);
         securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
+
         return "redirect:/trips";
     }
 
@@ -56,6 +64,7 @@ public class UserController {
         String loggedInUsername = securityService.findLoggedInUsername();
         User user = userService.findByUsername(loggedInUsername);
         mv.addObject("user", user);
+
         return mv;
     }
 
@@ -65,6 +74,7 @@ public class UserController {
             return "/edit-profile";
         }
         userService.saveUser(user);
+
         return "edit-profile";
     }
 
@@ -74,6 +84,7 @@ public class UserController {
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+
         return "redirect:/login?logout";
     }
 }

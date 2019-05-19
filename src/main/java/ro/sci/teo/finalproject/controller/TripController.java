@@ -66,7 +66,7 @@ public class TripController {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
         List<Trip> trips = tripService.findTripsByUserId(user.getUserId());
 
-        if (trips == null)
+        if (trips.isEmpty())
             return new ModelAndView("redirect:/new-trip");
 
         ModelAndView mv = new ModelAndView("trips");

@@ -1,7 +1,6 @@
 package ro.sci.teo.finalproject.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -15,29 +14,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
-    @Size(min = 2, max = 30, message = "At least 2 characters!")
+    @Size(max = 30, message = "Maximum 30 characters.")
     private String name;
 
-    @Size(min = 2, max = 30, message = "At least 2 characters!")
+    @Size(max = 30, message = "Maximum 30 characters.")
     private String surname;
 
-    @Size(min = 2, max = 30, message = "At least 2 characters!")
+    //custom validation, see Validator.java
     private String username;
 
-    //@Size(min = 10, max = 30, message = "At least 10 characters!")
-    @NotEmpty(message = "*Please provide your password.")
+    //custom validation, see Validator.java
     private String password;
 
     @Transient
     private String passwordConfirm;
 
-    @Size(min = 2, max = 30, message = "At least 2 characters!")
+    @Size(max = 30, message = "Maximum 30 characters.")
     private String city;
 
-    @Size(min = 2, max = 255, message = "At least 2 characters!")
+    @Size(max = 255, message = "Maximum 255 characters.")
     private String address;
 
-    @Size(min = 10, max = 10, message = "10 characters!")
+    //custom validation, see Validator.java
     private String phone;
 
     @ManyToMany
