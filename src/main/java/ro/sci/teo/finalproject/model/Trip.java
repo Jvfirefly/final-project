@@ -3,6 +3,7 @@ package ro.sci.teo.finalproject.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
@@ -19,6 +20,7 @@ public class Trip {
     @JoinColumn(name ="user_id", nullable = false)
     private User user;
 
+    //custom validation, see TripValidator.java
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -27,16 +29,22 @@ public class Trip {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
 
+    @Size(max = 255, message = "Maximum 255 characters.")
     private String impressions;
 
     private String photo1; //name of first picture
+    @Size(max = 30, message = "Maximum 30 characters.")
     private String title1; //title of first picture
+    @Size(max = 255, message = "Maximum 255 characters.")
     private String description1; //description of first picture
 
     private String photo2;
+    @Size(max = 30, message = "Maximum 30 characters.")
     private String title2;
+    @Size(max = 255, message = "Maximum 255 characters.")
     private String description2;
 
+    @Size(max = 255, message = "Maximum 255 characters.")
     private String location;
 
     private boolean deleted = false;

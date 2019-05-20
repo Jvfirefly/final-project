@@ -41,4 +41,9 @@ public class TripServiceImpl implements TripService {
     public Trip findTripById(int tripId) {
         return tripRepository.findTripById(tripId);
     }
+
+    @Override
+    public Trip findTripByNameAndUserId(String name, int userId) {
+        return tripRepository.findTripByNameAndUserId(name, userId);
+    }
 }

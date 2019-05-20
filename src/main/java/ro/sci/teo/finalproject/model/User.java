@@ -20,7 +20,7 @@ public class User {
     @Size(max = 30, message = "Maximum 30 characters.")
     private String surname;
 
-    //custom validation, see Validator.java
+    //custom validation, see UserValidator.java
     private String username;
 
     //custom validation, see Validator.java
@@ -35,7 +35,7 @@ public class User {
     @Size(max = 255, message = "Maximum 255 characters.")
     private String address;
 
-    //custom validation, see Validator.java
+    //custom validation, see UserValidator.java
     private String phone;
 
     @ManyToMany

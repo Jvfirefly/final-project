@@ -8,6 +8,9 @@ import org.springframework.validation.Validator;
 import ro.sci.teo.finalproject.model.User;
 import ro.sci.teo.finalproject.service.UserService;
 
+/**
+ * @author Teo
+ */
 @Component
 public class UserValidator implements Validator {
     @Autowired

@@ -12,6 +12,7 @@ import ro.sci.teo.finalproject.model.User;
 import ro.sci.teo.finalproject.service.SecurityService;
 import ro.sci.teo.finalproject.service.TripService;
 import ro.sci.teo.finalproject.service.UserService;
+import ro.sci.teo.finalproject.validator.TripValidator;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,6 +22,9 @@ import java.util.List;
  */
 @Controller
 public class TripController {
+    @Autowired
+    TripValidator tripValidator;
+
     @Autowired
     UserService userService;
 
@@ -41,6 +45,8 @@ public class TripController {
     public String addTrip(@RequestParam("photoFile1") MultipartFile photoFile1,
                           @RequestParam("photoFile2") MultipartFile photoFile2,
                           @ModelAttribute("trip") @Valid Trip trip, BindingResult bindingResult) {
+        tripValidator.validate(trip, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "new-trip";
         }
@@ -98,6 +104,8 @@ public class TripController {
     public String updateTrip(@RequestParam("photoFile1") MultipartFile photoFile1,
                              @RequestParam("photoFile2") MultipartFile photoFile2,
                              @ModelAttribute("trip") @Valid Trip trip, BindingResult bindingResult) {
+        tripValidator.validate(trip, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "/edit-trip/{id}";
         }

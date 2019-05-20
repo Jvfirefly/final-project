@@ -16,4 +16,6 @@ public interface TripService {
     List<Trip> findTripsByUserId(int userId);
 
     Trip findTripById(int tripId);
+
+    Trip findTripByNameAndUserId(String name, int userId);
 }

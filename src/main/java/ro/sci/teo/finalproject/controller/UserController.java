@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signUp(User user, BindingResult bindingResult) {
+    public String signUp(@Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -70,6 +70,8 @@ public class UserController {
 
     @PostMapping("/edit-profile")
     public String updateUser(@Valid User user, BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "/edit-profile";
         }
