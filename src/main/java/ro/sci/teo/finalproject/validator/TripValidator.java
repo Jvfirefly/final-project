@@ -17,13 +17,13 @@ import ro.sci.teo.finalproject.service.UserService;
 @Component
 public class TripValidator implements Validator {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    TripService tripService;
+    private TripService tripService;
 
     @Autowired
-    SecurityService securityService;
+    private SecurityService securityService;
 
     @Override
     public boolean supports(Class<?> aClass) {
