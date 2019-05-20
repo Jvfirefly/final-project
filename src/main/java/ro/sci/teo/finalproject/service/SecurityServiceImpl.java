@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author Teo
  */
 @Service
-public class SecurityServiceImpl implements SecurityService{
+public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private AuthenticationManager authenticationManager;
 

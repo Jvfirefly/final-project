@@ -17,7 +17,7 @@ public class Trip {
     private int tripId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name ="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     //custom validation, see TripValidator.java

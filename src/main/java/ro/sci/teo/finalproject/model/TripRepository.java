@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Integer> {
-    @Query(value="select * from trip where user_id=:value and deleted=false", nativeQuery = true)
+    @Query(value = "select * from trip where user_id=:value and deleted=false", nativeQuery = true)
     List<Trip> findTripsByUserId(@Param("value") int userId);
 
-    @Query(value="select * from trip where trip_id=:value and deleted=false", nativeQuery = true)
+    @Query(value = "select * from trip where trip_id=:value and deleted=false", nativeQuery = true)
     Trip findTripById(@Param("value") int tripId);
 
-    @Query(value="select * from trip where name=:value1 and user_id=:value2 and deleted=false", nativeQuery = true)
+    @Query(value = "select * from trip where name=:value1 and user_id=:value2 and deleted=false", nativeQuery = true)
     Trip findTripByNameAndUserId(@Param("value1") String name, @Param("value2") int userId);
 }

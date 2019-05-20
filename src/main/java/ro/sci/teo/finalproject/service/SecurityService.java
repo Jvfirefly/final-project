@@ -1,7 +1,7 @@
 package ro.sci.teo.finalproject.service;
 
 /**
- *  This interface was created to provide current logged-in user and auto login user after registration.
+ * This interface was created to provide current logged-in user and auto login user after registration.
  *
  * @author Teo
  */
