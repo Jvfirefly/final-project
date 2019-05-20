@@ -73,7 +73,7 @@ public class UserController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "/edit-profile";
+            return "edit-profile";
         }
         userService.saveUser(user);
 

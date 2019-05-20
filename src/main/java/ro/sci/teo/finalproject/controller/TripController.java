@@ -107,7 +107,7 @@ public class TripController {
         tripValidator.validate(trip, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "/edit-trip/{id}";
+            return "edit-trip/{id}";
         }
 
         try {
@@ -115,7 +115,7 @@ public class TripController {
             tripService.saveImg(photoFile2);
         } catch (Exception e) {
             e.printStackTrace();
-            return "/edit-trip/{id}";
+            return "edit-trip/{id}";
         }
 
         trip.setUser(userService.findByUsername(securityService.findLoggedInUsername()));
@@ -123,7 +123,7 @@ public class TripController {
         trip.setPhoto2(photoFile2.getOriginalFilename());
         tripService.saveTrip(trip);
 
-        return "/edit-trip/{id}";
+        return "edit-trip/{id}";
     }
 
     @PostMapping("/delete")

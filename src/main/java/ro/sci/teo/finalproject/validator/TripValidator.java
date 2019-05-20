@@ -1,18 +1,29 @@
 package ro.sci.teo.finalproject.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ro.sci.teo.finalproject.model.Trip;
+import ro.sci.teo.finalproject.model.User;
+import ro.sci.teo.finalproject.service.SecurityService;
 import ro.sci.teo.finalproject.service.TripService;
+import ro.sci.teo.finalproject.service.UserService;
 
 /**
  * @author Teo
  */
+@Component
 public class TripValidator implements Validator {
     @Autowired
+    UserService userService;
+
+    @Autowired
     TripService tripService;
+
+    @Autowired
+    SecurityService securityService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -27,7 +38,9 @@ public class TripValidator implements Validator {
         if (trip.getName().length() > 30) {
             errors.rejectValue("name", "Size.tripForm.name");
         }
-        if (tripService.findTripByNameAndUserId(trip.getName(), trip.getUser().getUserId()) != null) {
+
+        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        if (tripService.findTripByNameAndUserId(trip.getName(), user.getUserId()) != null) {
             errors.rejectValue("name", "Duplicate.tripForm.name");
         }
     }
